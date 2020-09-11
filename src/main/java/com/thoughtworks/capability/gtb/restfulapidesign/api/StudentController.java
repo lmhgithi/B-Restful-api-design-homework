@@ -23,23 +23,23 @@ public class StudentController {
 
     @GetMapping("/students")
     public ResponseEntity<List<Student>> getStudents() {
-        return ResponseEntity.ok(studentService.getStudents());
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudents());
     }
 
     @GetMapping("/students/genders/{gender}")
     public ResponseEntity<List<Student>> getStudentsByGender(@PathVariable Gender gender) {
-        return ResponseEntity.ok(studentService.getStudentsByGender(gender));
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudentsByGender(gender));
     }
 
     @GetMapping("/students/{name}")
     public ResponseEntity<Student> getStudentsByName(@PathVariable String name) throws SimpleException {
-        return ResponseEntity.ok(studentService.getStudentsByName(name));
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudentsByName(name));
     }
 
     @DeleteMapping("/students/{name}")
     public ResponseEntity deleteStudents(@PathVariable String name) throws SimpleException {
         studentService.deleteStudents(name);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PostMapping("/students")
