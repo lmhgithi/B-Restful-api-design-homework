@@ -22,13 +22,12 @@ public class StudentController {
     }
 
     @GetMapping("/students")
-    public ResponseEntity<List<Student>> getStudents() {
-        return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudents());
-    }
-
-    @GetMapping("/students/genders/{gender}")
-    public ResponseEntity<List<Student>> getStudentsByGender(@PathVariable Gender gender) {
-        return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudentsByGender(gender));
+    public ResponseEntity<List<Student>> getStudents(@RequestParam(required = false) Gender gender) {
+        if(gender == null){
+            return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudents());
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudentsByGender(gender));
+        }
     }
 
     @GetMapping("/students/{name}")
