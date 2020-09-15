@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@RequestMapping("/v1/groups")
 public class GroupController {
     private final GroupService groupService;
 
@@ -20,17 +20,17 @@ public class GroupController {
     }
 
 
-    @GetMapping("/groups")
+    @GetMapping
     public ResponseEntity<List<Group>> getGroups() {
         return ResponseEntity.status(HttpStatus.OK).body(groupService.getGroups());
     }
 
-    @PostMapping("/groups")
+    @PostMapping
     public ResponseEntity<List<Group>> group() {
         return ResponseEntity.status(HttpStatus.CREATED).body(groupService.group());
     }
 
-    @PatchMapping("/groups/{id}/{name}")
+    @PatchMapping("/{id}/{name}")
     public ResponseEntity<List<Group>> changeGroupName(@PathVariable Integer id,
                                          @PathVariable String name) throws SimpleException {
         List<Group> groups = groupService.changeGroupName(id, name);
