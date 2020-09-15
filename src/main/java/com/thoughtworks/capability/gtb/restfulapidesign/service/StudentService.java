@@ -18,13 +18,12 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public List<Student> getStudents() {
-        return studentRepository.getStudents();
-    }
-
-    public List<Student> getStudentsByGender(Gender gender) {
-        return studentRepository.findStudentsByGender(gender);
-
+    public List<Student> getStudents(Gender gender) {
+        if(gender == null) {
+            return studentRepository.getStudents();
+        } else {
+            return studentRepository.findStudentsByGender(gender);
+        }
     }
 
     public Student getStudentsByName(String name) throws SimpleException {
